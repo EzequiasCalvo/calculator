@@ -6,6 +6,43 @@
   justify-content: center;
 }
 
+// outputs section
+.output-wrapper {
+  width: 98%;
+  height: 52px;
+  border: 1px solid #3c4043;
+  border-radius: 8px;
+  margin: auto;
+  padding: 6px 10px 0 10px;
+  box-sizing: border-box;
+}
+.output--last {
+  height: 20px;
+  color: #969ba1;
+  font-size: 13px;
+  position: relative;
+  & > span {
+    width: 100%;
+    text-align: right;
+    font-family: arial, sans-serif;
+    float: right;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+}
+
+.output--current {
+  vertical-align: middle;
+  width: 100%;
+  & > span {
+    color: #e8eaed;
+    float: right;
+    font-family: arial, sans-serif;
+    white-space: nowrap;
+  }
+}
+
+// buttons section
 .buttons-wrapper {
   display: flex;
 }
