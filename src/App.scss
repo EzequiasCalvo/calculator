@@ -1,3 +1,5 @@
+$increment: 1.5;
+
 .container {
   height: 100vh;
   background-color: #202123;
@@ -9,7 +11,7 @@
 // outputs section
 .output-wrapper {
   width: 98%;
-  height: 52px;
+  height: #{42px * $increment};
   border: 1px solid #3c4043;
   border-radius: 8px;
   margin: 5px auto;
@@ -19,7 +21,7 @@
 .output--last {
   height: 20px;
   color: #969ba1;
-  font-size: 13px;
+  font-size: #{10px * $increment};
   position: relative;
   & > span {
     width: 100%;
@@ -34,6 +36,7 @@
 .output--current {
   vertical-align: middle;
   width: 100%;
+  font-size: #{16px * $increment};
   & > span {
     color: #e8eaed;
     float: right;
