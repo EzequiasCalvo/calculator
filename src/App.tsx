@@ -3,17 +3,23 @@ import "./App.scss";
 import Button from "./components/Button";
 import { CalculatorState, SpecialDigits } from "./types";
 
+const initialState = {
+  operation: "",
+  currentOperand: "",
+  prevOperand: "",
+};
+
 const App = () => {
-  const [calculationData, setCalculationData] = useState<CalculatorState>({
-    operation: "",
-    currentOperand: "",
-    prevOperand: "",
-  });
+  const [calculationData, setCalculationData] =
+    useState<CalculatorState>(initialState);
 
   const { operation, currentOperand, prevOperand } = calculationData;
 
   const handleClick = (digit: number | string) => {
     switch (digit) {
+      case "CLEAR":
+        return setCalculationData(initialState);
+
       default:
         return setCalculationData({
           ...calculationData,
