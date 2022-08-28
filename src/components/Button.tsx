@@ -34,8 +34,6 @@ const Button = ({
     handleClick(digit, operation);
   };
 
-  console.log(specialDigit);
-
   return (
     <button id={specialDigit} onClick={handleOperation}>
       {digit}
