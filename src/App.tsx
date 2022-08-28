@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./App.scss";
+import "./scss/App.scss";
+import Modal from "./components/Modal";
 import Button from "./components/Button";
 import { CalculatorState, SpecialDigits, Operation } from "./types";
 import { calculate } from "./utils/calculate";
@@ -14,6 +15,9 @@ const initialState = {
 const App = () => {
   const [calculationData, setCalculationData] =
     useState<CalculatorState>(initialState);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
 
   const { operation, currentOperand, prevOperand, overwrite } = calculationData;
 
@@ -48,7 +52,6 @@ const App = () => {
         }
         if (currentOperand === "") {
           // handle error
-          return;
         }
         if (prevOperand === "") {
           return setCalculationData({
@@ -76,6 +79,14 @@ const App = () => {
         }
 
         // add a check to avoid more than one dot
+        if (digit === "." && currentOperand.includes(".")) {
+          setModalMessage(
+            "It is not possible to have more than one decimal operator in the same number."
+          );
+          setModalTitle("This operation is forbidden!");
+          setOpenModal(true);
+          return;
+        }
         return setCalculationData({
           ...calculationData,
           currentOperand: `${currentOperand}${digit}`,
@@ -84,6 +95,12 @@ const App = () => {
       case "CALCULATE":
         if (operation === "" || currentOperand === "" || prevOperand === "") {
           return calculationData;
+        }
+
+        if (prevOperand === "0" || currentOperand === "0") {
+          setModalMessage("Any number multiplied by 0 will result in 0");
+          setModalTitle("This is a learning tip!");
+          setOpenModal(true);
         }
         return setCalculationData({
           ...calculationData,
@@ -181,6 +198,13 @@ const App = () => {
           </section>
         </section>
       </div>
+      {openModal && (
+        <Modal
+          openModal={setOpenModal}
+          title={modalTitle}
+          message={modalMessage}
+        />
+      )}
     </div>
   );
 };
