@@ -1,8 +1,4 @@
-enum SpecialDigits {
-  ZERO = "zero",
-  EQUAL = "equal",
-  CLEAR = "clear",
-}
+import { SpecialDigits } from "../types";
 
 interface ButtonProps {
   digit: number | string;

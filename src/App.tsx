@@ -1,18 +1,7 @@
 import { useState } from "react";
 import "./App.scss";
 import Button from "./components/Button";
-
-enum SpecialDigits {
-  ZERO = "zero",
-  EQUAL = "equal",
-  CLEAR = "clear",
-}
-
-interface CalculatorState {
-  currentOperand: number | string;
-  prevOperand: number | string;
-  operation: string;
-}
+import { CalculatorState, SpecialDigits } from "./types";
 
 const App = () => {
   const [calculationData, setCalculationData] = useState<CalculatorState>({
