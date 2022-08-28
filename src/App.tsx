@@ -1,54 +1,101 @@
+import { useState } from "react";
 import "./App.scss";
+import Button from "./components/Button";
 
-function App() {
+enum SpecialDigits {
+  ZERO = "zero",
+  EQUAL = "equal",
+  CLEAR = "clear",
+}
+
+interface CalculatorState {
+  currentOperand: number | string;
+  prevOperand: number | string;
+  operation: string;
+}
+
+const App = () => {
+  const [calculationData, setCalculationData] = useState<CalculatorState>({
+    operation: "",
+    currentOperand: "",
+    prevOperand: "",
+  });
+
+  const { operation, currentOperand, prevOperand } = calculationData;
+
+  const handleClick = (digit: number | string) => {
+    switch (digit) {
+      default:
+        return setCalculationData({
+          ...calculationData,
+          currentOperand: `${currentOperand}${digit}`,
+        });
+    }
+  };
+
   return (
     <div className="container">
       <div>
         <section className="output-wrapper">
           <div className="output--last">
-            <span>356 - 23 = 333</span>
+            <span>
+              {prevOperand} {operation}
+            </span>
           </div>
           <div className="output--current">
-            <span>8548 - 234</span>
+            <span>{currentOperand}</span>
           </div>
         </section>
         <section className="buttons-wrapper">
           <div>
             <section className="delete">
-              <button className="button" id="clear">
-                CLEAR
-              </button>
-              <button className="button" id="delete">
-                DEL
-              </button>
+              <Button
+                handleClick={handleClick}
+                digit="CLEAR"
+                specialDigit={SpecialDigits.CLEAR}
+              />
+
+              <Button handleClick={handleClick} digit="DEL" />
             </section>
             <section className="numbers">
-              <button className="button">7</button>
-              <button className="button">8</button>
-              <button className="button">9</button>
-              <button className="button">4</button>
-              <button className="button">5</button>
-              <button className="button">6</button>
-              <button className="button">7</button>
-              <button className="button">8</button>
-              <button className="button">9</button>
-              <button className="button" id="zero">
-                0
-              </button>
-              <button className="button">.</button>
+              <Button handleClick={handleClick} digit="7" />
+
+              <Button handleClick={handleClick} digit="8" />
+
+              <Button handleClick={handleClick} digit="9" />
+
+              <Button handleClick={handleClick} digit="4" />
+
+              <Button handleClick={handleClick} digit="5" />
+
+              <Button handleClick={handleClick} digit="6" />
+
+              <Button handleClick={handleClick} digit="7" />
+
+              <Button handleClick={handleClick} digit="8" />
+
+              <Button handleClick={handleClick} digit="9" />
+
+              <Button
+                handleClick={handleClick}
+                digit="0"
+                specialDigit={SpecialDigits.ZERO}
+              />
+
+              <Button handleClick={handleClick} digit="." />
             </section>
           </div>
           <section className="operators">
-            <button className="button">÷</button>
-            <button className="button">x</button>
-            <button className="button">-</button>
-            <button className="button">+</button>
-            <button className="button">=</button>
+            <Button handleClick={handleClick} digit="÷" />
+            <Button handleClick={handleClick} digit="x" />
+            <Button handleClick={handleClick} digit="-" />
+            <Button handleClick={handleClick} digit="+" />
+            <Button handleClick={handleClick} digit="=" />
           </section>
         </section>
       </div>
     </div>
   );
-}
+};
 
 export default App;
