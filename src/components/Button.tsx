@@ -1,3 +1,4 @@
+import "../scss/Button.scss";
 import { SpecialDigits, Operation } from "../types";
 
 enum MathOperator {

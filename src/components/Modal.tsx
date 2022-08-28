@@ -1,4 +1,4 @@
-import "../scss/modal.scss";
+import "../scss/Modal.scss";
 
 interface ModalProps {
   openModal: (openModal: boolean) => void;
