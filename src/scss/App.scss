@@ -24,7 +24,7 @@ $increment: 1.5;
   font-size: #{10px * $increment};
   position: relative;
   & > span {
-    width: 100%;
+    max-width: 100%;
     text-align: right;
     font-family: arial, sans-serif;
     float: right;
@@ -35,7 +35,7 @@ $increment: 1.5;
 
 .output--current {
   vertical-align: middle;
-  width: 100%;
+  max-width: 100%;
   font-size: #{16px * $increment};
   & > span {
     color: #e8eaed;
@@ -101,6 +101,12 @@ button {
 
 #clear {
   width: 183.9px;
+}
+
+#equal {
+  background: #aecbfa;
+  border-color: #aecbfa;
+  color: #202124;
 }
 
 #zero {

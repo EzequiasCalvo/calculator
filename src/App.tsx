@@ -51,7 +51,15 @@ const App = () => {
           return;
         }
         if (currentOperand === "") {
-          // handle error
+          setModalMessage(
+            "It is not possible to perform an operation with two consecutive operators."
+          );
+          setModalTitle("This is an invalid operation.");
+          setOpenModal(true);
+          return setCalculationData({
+            ...calculationData,
+            operation: digit,
+          });
         }
         if (prevOperand === "") {
           return setCalculationData({
@@ -194,6 +202,7 @@ const App = () => {
               handleClick={handleClick}
               digit="="
               operation={Operation.EQUAL}
+              specialDigit={SpecialDigits.EQUAL}
             />
           </section>
         </section>
