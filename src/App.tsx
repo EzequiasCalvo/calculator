@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./App.scss";
 import Button from "./components/Button";
-import { CalculatorState, SpecialDigits } from "./types";
+import { CalculatorState, SpecialDigits, Operation } from "./types";
+import { calculate } from "./utils/calculate";
 
 const initialState = {
   operation: "",
@@ -15,16 +16,45 @@ const App = () => {
 
   const { operation, currentOperand, prevOperand } = calculationData;
 
-  const handleClick = (digit: number | string) => {
-    switch (digit) {
+  const handleClick = (digit: string, operationType?: string) => {
+    switch (operationType) {
       case "CLEAR":
         return setCalculationData(initialState);
 
-      default:
+      case "OPERATION":
+        if (currentOperand === "" && prevOperand === "") {
+          return;
+        }
+        if (currentOperand === "") {
+          // handle error
+          return;
+        }
+        if (prevOperand === "") {
+          return setCalculationData({
+            ...calculationData,
+            operation: digit,
+            prevOperand: currentOperand,
+            currentOperand: "",
+          });
+        }
+
+        return setCalculationData({
+          ...calculationData,
+          prevOperand: calculate(calculationData),
+          operation: digit,
+          currentOperand: "",
+        });
+
+      case "ADD":
         return setCalculationData({
           ...calculationData,
           currentOperand: `${currentOperand}${digit}`,
         });
+
+      case "CALCULATE":
+        if (operation === "" || currentOperand === "" || prevOperand === "") {
+          return calculationData;
+        }
     }
   };
 
@@ -48,9 +78,14 @@ const App = () => {
                 handleClick={handleClick}
                 digit="CLEAR"
                 specialDigit={SpecialDigits.CLEAR}
+                operation={Operation.CLEAR}
               />
 
-              <Button handleClick={handleClick} digit="DEL" />
+              <Button
+                handleClick={handleClick}
+                digit="DEL"
+                operation={Operation.DELETE}
+              />
             </section>
             <section className="numbers">
               <Button handleClick={handleClick} digit="7" />
@@ -81,11 +116,31 @@ const App = () => {
             </section>
           </div>
           <section className="operators">
-            <Button handleClick={handleClick} digit="÷" />
-            <Button handleClick={handleClick} digit="x" />
-            <Button handleClick={handleClick} digit="-" />
-            <Button handleClick={handleClick} digit="+" />
-            <Button handleClick={handleClick} digit="=" />
+            <Button
+              handleClick={handleClick}
+              operation={Operation.DIVIDE}
+              digit="÷"
+            />
+            <Button
+              handleClick={handleClick}
+              operation={Operation.MULTIPLY}
+              digit="x"
+            />
+            <Button
+              handleClick={handleClick}
+              operation={Operation.SUBSTRACT}
+              digit="-"
+            />
+            <Button
+              handleClick={handleClick}
+              operation={Operation.SUM}
+              digit="+"
+            />
+            <Button
+              handleClick={handleClick}
+              digit="="
+              operation={Operation.EQUAL}
+            />
           </section>
         </section>
       </div>

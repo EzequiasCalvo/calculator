@@ -1,14 +1,17 @@
 export interface CalculatorState {
-  currentOperand: number | string;
-  prevOperand: number | string;
+  currentOperand: string;
+  prevOperand: string;
   operation: string;
 }
 
 export enum Operation {
-  MULTIPLY,
-  SUBSTRACT,
-  SUM,
-  DIVIDE,
+  MULTIPLY = "MULTIPLY",
+  SUBSTRACT = "SUBSTRACT",
+  SUM = "SUM",
+  DIVIDE = "DIVIDE",
+  EQUAL = "EQUAL",
+  CLEAR = "CLEAR",
+  DELETE = "DELETE",
 }
 
 export enum SpecialDigits {
