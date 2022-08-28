@@ -12,5 +12,10 @@ In the project directory, you can run:
 ### Reports
 
 #### Learning modal report
+![learning_tip](https://user-images.githubusercontent.com/96049132/187091016-91ff8eab-18a7-4a7a-bff3-740731c4ef5e.gif)
+
 
 #### Error modal report
+![error_report_decimals](https://user-images.githubusercontent.com/96049132/187091022-7302f400-cba9-4804-9fb1-63d446af1d01.gif)
+![error_report_operation](https://user-images.githubusercontent.com/96049132/187091023-fc87f3bd-eb5e-42e2-a07b-cf52ef7d5f1b.gif)
+
