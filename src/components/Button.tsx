@@ -1,8 +1,9 @@
-import { SpecialDigits } from "../types";
+import { SpecialDigits, Operation } from "../types";
 
 interface ButtonProps {
   digit: number | string;
   handleClick: (digit: number | string) => void;
+  operation?: Operation;
   specialDigit?: SpecialDigits;
 }
 

@@ -4,6 +4,13 @@ export interface CalculatorState {
   operation: string;
 }
 
+export enum Operation {
+  MULTIPLY,
+  SUBSTRACT,
+  SUM,
+  DIVIDE,
+}
+
 export enum SpecialDigits {
   ZERO = "zero",
   EQUAL = "equal",
