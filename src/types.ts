@@ -2,6 +2,7 @@ export interface CalculatorState {
   currentOperand: string;
   prevOperand: string;
   operation: string;
+  overwrite: boolean;
 }
 
 export enum Operation {

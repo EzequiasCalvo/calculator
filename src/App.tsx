@@ -8,18 +8,39 @@ const initialState = {
   operation: "",
   currentOperand: "",
   prevOperand: "",
+  overwrite: false,
 };
 
 const App = () => {
   const [calculationData, setCalculationData] =
     useState<CalculatorState>(initialState);
 
-  const { operation, currentOperand, prevOperand } = calculationData;
+  const { operation, currentOperand, prevOperand, overwrite } = calculationData;
 
   const handleClick = (digit: string, operationType?: string) => {
     switch (operationType) {
       case "CLEAR":
         return setCalculationData(initialState);
+
+      case "DELETE":
+        if (overwrite) {
+          return setCalculationData({
+            ...calculationData,
+            overwrite: false,
+            currentOperand: "",
+          });
+        }
+        if (currentOperand === "") return;
+        if (currentOperand.length === 1) {
+          return setCalculationData({
+            ...calculationData,
+            currentOperand: "",
+          });
+        }
+        return setCalculationData({
+          ...calculationData,
+          currentOperand: currentOperand.slice(0, -1),
+        });
 
       case "OPERATION":
         if (currentOperand === "" && prevOperand === "") {
@@ -46,6 +67,15 @@ const App = () => {
         });
 
       case "ADD":
+        if (overwrite) {
+          return setCalculationData({
+            ...calculationData,
+            currentOperand: digit,
+            overwrite: false,
+          });
+        }
+
+        // add a check to avoid more than one dot
         return setCalculationData({
           ...calculationData,
           currentOperand: `${currentOperand}${digit}`,
@@ -55,6 +85,13 @@ const App = () => {
         if (operation === "" || currentOperand === "" || prevOperand === "") {
           return calculationData;
         }
+        return setCalculationData({
+          ...calculationData,
+          overwrite: true,
+          prevOperand: "",
+          operation: "",
+          currentOperand: calculate(calculationData),
+        });
     }
   };
 
