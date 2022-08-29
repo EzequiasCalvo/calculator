@@ -57,9 +57,13 @@ button {
 }
 
 #equal {
-  background: #aecbfa;
-  border-color: #aecbfa;
+  background: #8ab4f8;
   color: #202124;
+  border: 1px solid #8ab4f8;
+  &:hover {
+    background: #aecbfa;
+    border-color: #aecbfa;
+  }
 }
 
 #zero {
